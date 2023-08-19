@@ -12,7 +12,7 @@ final class FlightConnectionsTests: XCTestCase {
     
     func testFlightConnectionAPI() async {
         let mockedFlightConnection = FlighConnectionsMockAPI()
-        var flightConnectionsResponse: FlightConnectionResponse?
+        var flightConnectionsResponse: FlightConnections?
         do {
             flightConnectionsResponse = try await mockedFlightConnection.fetchFlightConnections()
         } catch {

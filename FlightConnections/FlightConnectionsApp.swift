@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct FlightConnectionsApp: App {
+   
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            let dataSource = FlightConnectionsAPI()
+            let originFlightsViewViewModel = OriginFlightsViewModel(dataSource: dataSource)
+            OriginFlightsView(viewModel: originFlightsViewViewModel)
         }
     }
 }
+
