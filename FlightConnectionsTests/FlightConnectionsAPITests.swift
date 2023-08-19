@@ -8,7 +8,7 @@
 import XCTest
 @testable import FlightConnections
 
-final class FlightConnectionsTests: XCTestCase {
+final class FlightConnectionsAPITests: XCTestCase {
     
     func testFlightConnectionAPI() async {
         let mockedFlightConnection = FlighConnectionsMockAPI()

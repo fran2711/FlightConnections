@@ -11,7 +11,7 @@
 		9482E4032A8EBDCA00BDD3B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9482E4022A8EBDCA00BDD3B1 /* ContentView.swift */; };
 		9482E4052A8EBDCA00BDD3B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9482E4042A8EBDCA00BDD3B1 /* Assets.xcassets */; };
 		9482E4082A8EBDCA00BDD3B1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9482E4072A8EBDCA00BDD3B1 /* Preview Assets.xcassets */; };
-		9482E4122A8EBDCB00BDD3B1 /* FlightConnectionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9482E4112A8EBDCB00BDD3B1 /* FlightConnectionsTests.swift */; };
+		9482E4122A8EBDCB00BDD3B1 /* FlightConnectionsAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9482E4112A8EBDCB00BDD3B1 /* FlightConnectionsAPITests.swift */; };
 		9482E42C2A8EBE5E00BDD3B1 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9482E42B2A8EBE5E00BDD3B1 /* API.swift */; };
 		9482E4322A8EC08000BDD3B1 /* URLSession+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9482E4312A8EC08000BDD3B1 /* URLSession+Async.swift */; };
 		9482E4352A8EC1C000BDD3B1 /* APIFlightConnectionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9482E4342A8EC1C000BDD3B1 /* APIFlightConnectionsDataSource.swift */; };
@@ -22,6 +22,7 @@
 		94DD9BC52A9017E900A9C870 /* OriginFlightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD9BC32A9017E900A9C870 /* OriginFlightsViewModel.swift */; };
 		94DD9BC72A901A4100A9C870 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD9BC62A901A4100A9C870 /* LoadingView.swift */; };
 		94DD9BCA2A90221100A9C870 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD9BC92A90221100A9C870 /* ConnectionView.swift */; };
+		94DD9BCC2A91759800A9C870 /* FlightConnectionsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD9BCB2A91759800A9C870 /* FlightConnectionsViewModelTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +42,7 @@
 		9482E4042A8EBDCA00BDD3B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9482E4072A8EBDCA00BDD3B1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9482E40D2A8EBDCB00BDD3B1 /* FlightConnectionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlightConnectionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9482E4112A8EBDCB00BDD3B1 /* FlightConnectionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightConnectionsTests.swift; sourceTree = "<group>"; };
+		9482E4112A8EBDCB00BDD3B1 /* FlightConnectionsAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightConnectionsAPITests.swift; sourceTree = "<group>"; };
 		9482E42B2A8EBE5E00BDD3B1 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		9482E4312A8EC08000BDD3B1 /* URLSession+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Async.swift"; sourceTree = "<group>"; };
 		9482E4342A8EC1C000BDD3B1 /* APIFlightConnectionsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFlightConnectionsDataSource.swift; sourceTree = "<group>"; };
@@ -53,6 +54,7 @@
 		94DD9BC32A9017E900A9C870 /* OriginFlightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginFlightsViewModel.swift; sourceTree = "<group>"; };
 		94DD9BC62A901A4100A9C870 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		94DD9BC92A90221100A9C870 /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
+		94DD9BCB2A91759800A9C870 /* FlightConnectionsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightConnectionsViewModelTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +121,8 @@
 		9482E4102A8EBDCB00BDD3B1 /* FlightConnectionsTests */ = {
 			isa = PBXGroup;
 			children = (
-				9482E4112A8EBDCB00BDD3B1 /* FlightConnectionsTests.swift */,
+				9482E4112A8EBDCB00BDD3B1 /* FlightConnectionsAPITests.swift */,
+				94DD9BCB2A91759800A9C870 /* FlightConnectionsViewModelTest.swift */,
 			);
 			path = FlightConnectionsTests;
 			sourceTree = "<group>";
@@ -296,7 +299,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9482E4122A8EBDCB00BDD3B1 /* FlightConnectionsTests.swift in Sources */,
+				94DD9BCC2A91759800A9C870 /* FlightConnectionsViewModelTest.swift in Sources */,
+				9482E4122A8EBDCB00BDD3B1 /* FlightConnectionsAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

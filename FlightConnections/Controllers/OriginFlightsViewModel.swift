@@ -32,7 +32,7 @@ class OriginFlightsViewModel: OriginFlightsVM {
         switch event {
         case .onAppear:
             self.loading = true
-            fetchFlightConnections(dataSource: dataSource)
+            fetchFlightConnections()
         case .connectionDestinationSelected(let destination):
             self.flightDestination = destination
         case .connectionOriginSelected(let origin):
@@ -44,7 +44,7 @@ class OriginFlightsViewModel: OriginFlightsVM {
         }
     }
     
-    func fetchFlightConnections(dataSource: FlightConnectionsDataSource) {
+    func fetchFlightConnections() {
         Task {
             defer { self.loading = false }
             do {
