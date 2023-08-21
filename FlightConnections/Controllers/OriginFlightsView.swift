@@ -18,12 +18,13 @@ public enum OriginFlightsEvent {
 @MainActor
 public protocol OriginFlightsVM: ObservableObject {
     var loading: Bool { get }
+    var alert: AlertUIModel? { get set }
+    
     var cityOriginList: [String] { get }
     var cityDestinationList: [String] { get }
     var flightOrigin: String { get }
     var flightDestination: String { get }
     var price: String { get }
-    var showPrice: Bool { get set }
     
     func handle(event: OriginFlightsEvent)
 }
@@ -33,7 +34,6 @@ public struct OriginFlightsView<ViewModel: OriginFlightsVM>: View {
     @StateObject var viewModel: ViewModel
     @State private var originSelected = ""
     @State private var destinationSelected = ""
-    @State private var showAlert = false
     
     public init(viewModel: ViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -83,9 +83,7 @@ public struct OriginFlightsView<ViewModel: OriginFlightsVM>: View {
         }
         .background(Color.white.ignoresSafeArea())
         .loading(loading: viewModel.loading)
-        .alert(isPresented: $viewModel.showPrice, content: {
-            Alert(title: Text("Flight Price"), message: Text("The price is \(viewModel.price)"))
-        })
+        .alert(model: $viewModel.alert)
         .onAppear {
             viewModel.handle(event: .onAppear)
         }
@@ -94,7 +92,7 @@ public struct OriginFlightsView<ViewModel: OriginFlightsVM>: View {
 
 #if DEBUG
 class MockOriginFlightsVM: OriginFlightsVM {
-    var showPrice: Bool = false
+    var alert: AlertUIModel? = nil
     var cityOriginList: [String] = ["London", "Tokio", "Los Angeles"]
     var cityDestinationList: [String] = ["Tokio", "Porto", "Singapur"]
     var flightOrigin: String = "London"

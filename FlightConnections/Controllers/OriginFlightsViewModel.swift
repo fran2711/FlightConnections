@@ -9,8 +9,7 @@ import SwiftUI
 
 @MainActor
 class OriginFlightsViewModel: OriginFlightsVM {
-    
-    
+
     @Published var flightOrigin: String = "N/A"
     @Published var flightDestination: String = "N/A"
     @Published var price: String = ""
@@ -19,10 +18,9 @@ class OriginFlightsViewModel: OriginFlightsVM {
     
     @Published private var connectionsList: [Connection] = []
     @Published private (set) var loading: Bool = false
+    @Published var alert: AlertUIModel? = nil
     
     let dataSource: FlightConnectionsDataSource
-    var showPrice: Bool = false
-
     
     init(dataSource: FlightConnectionsDataSource) {
         self.dataSource = dataSource
@@ -40,7 +38,7 @@ class OriginFlightsViewModel: OriginFlightsVM {
         case .searchFlights:
             searchFligths()
         case .showPrice:
-            self.showPrice = true
+            self.alert = AlertUIModel(title: "Price", message: "Flight total price is \(price)", action: .default(title: "Ok", action: {}))
         }
     }
     
@@ -55,7 +53,11 @@ class OriginFlightsViewModel: OriginFlightsVM {
                 cityOriginList = getCitiesArray(connections: connections, isOrigin: true)
                 cityDestinationList = getCitiesArray(connections: connections, isOrigin: false)
             } catch {
-                print(error.localizedDescription)
+                self.alert = AlertUIModel(title: "Error", message: error.localizedDescription,
+                                          actions:
+                                            [.default(title: "Retry",
+                                                      action: { self.fetchFlightConnections() }),
+                                             .cancel(action: .none)])
             }
         }
     }
@@ -74,6 +76,11 @@ class OriginFlightsViewModel: OriginFlightsVM {
     
     func searchFligths() {
         
+        if flightOrigin == flightDestination {
+            self.alert = AlertUIModel(title: "Error",message: "Origin and destination cities can't be the same", action: .default(title: "Ok", action: {}))
+            return
+        }
+        
         var finalConnection: [Connection] = []
         let originConnectionsArray = connectionsList.filter({ $0.from == flightOrigin })
         let destinationConnectionsArray = connectionsList.filter( { $0.to == flightDestination })
@@ -86,53 +93,68 @@ class OriginFlightsViewModel: OriginFlightsVM {
                let origin = originConnectionsArray
                 finalConnection.append(contentsOf: origin)
             } else if originConnectionsArray.count > 1 {
-                let originConnections = connectionsList.filter { connection in
-                    return originConnectionsArray.contains(where: { scale in
-                        return connection.from == scale.to
-                    })
-                }
-                
-                let scales = originConnections.filter { connection in
-                    return destinationConnectionsArray.contains { destination in
-                        return connection.to == destination.from
-                    }
-                }
-                
-                let origin = originConnectionsArray.filter({ origin in
-                    return scales.contains { scaleConnection in
-                        return origin.to == scaleConnection.from
-                    }
-                })
-                finalConnection.append(contentsOf: origin)
-                if scales.count == 1 {
-                    finalConnection.append(contentsOf: scales)
-                }
+                finalConnection.append(contentsOf: getOrigin(originConnectionsArray: originConnectionsArray, destinationConnectionsArray: destinationConnectionsArray))
             }
             
             while finalConnection.last?.to != flightDestination {
-                let lastConnection = finalConnection.last?.to
-                let array = connectionsList.filter({ $0.from == lastConnection })
-                
-                let scales = array.filter({ connection in
-                    connection.from == lastConnection
-                })
-                
-                let finalDestinationOrigin = destinationConnectionsArray.map({ $0.from })
-                
-                if scales.count > 1 {
-                    
-                    let scale = scales.filter { connection in
-                        return finalDestinationOrigin.contains { scale in
-                            return connection.to == scale || (connection.from == scale && connection.to == flightDestination)
-                        }
-                    }
-                    finalConnection.append(contentsOf: scale)
-                } else {
-                    finalConnection.append(contentsOf: scales)
-                }
+                finalConnection.append(contentsOf: getDestinationAndScales(finalConnection: finalConnection, destinationConnectionsArray: destinationConnectionsArray))
             }
         }
         price = finalConnection.map({ ($0.price) }).reduce(0, +).toString
         self.handle(event: .showPrice)
+    }
+    
+    
+    func getOrigin(originConnectionsArray: [Connection], destinationConnectionsArray: [Connection]) -> [Connection] {
+        var finalConnection: [Connection] = []
+        let originConnections = connectionsList.filter { connection in
+            return originConnectionsArray.contains(where: { scale in
+                return connection.from == scale.to
+            })
+        }
+        
+        let scales = originConnections.filter { connection in
+            return destinationConnectionsArray.contains { destination in
+                return connection.to == destination.from || connection.from == destination.from
+            }
+        }
+        
+        let origin = originConnectionsArray.filter({ origin in
+            return scales.contains { scaleConnection in
+                return origin.to == scaleConnection.from
+            }
+        })
+        finalConnection.append(contentsOf: origin)
+        if scales.count == 1 {
+            finalConnection.append(contentsOf: scales)
+        }
+        
+        return finalConnection
+    }
+    
+    
+    func getDestinationAndScales(finalConnection: [Connection], destinationConnectionsArray: [Connection]) -> [Connection] {
+        var connectionsArray: [Connection] = []
+        let lastConnection = finalConnection.last?.to
+        let array = connectionsList.filter({ $0.from == lastConnection })
+        
+        let scales = array.filter({ connection in
+            connection.from == lastConnection
+        })
+        
+        let finalDestinationOrigin = destinationConnectionsArray.map({ $0.from })
+        
+        if scales.count > 1 {
+            let scale = scales.filter { connection in
+                return finalDestinationOrigin.contains { scale in
+                    return connection.to == scale || (connection.from == scale && connection.to == flightDestination)
+                }
+            }
+            connectionsArray.append(contentsOf: scale)
+        } else {
+            connectionsArray.append(contentsOf: scales)
+        }
+        
+        return connectionsArray
     }
 }

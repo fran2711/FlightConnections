@@ -23,6 +23,7 @@
 		94DD9BC72A901A4100A9C870 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD9BC62A901A4100A9C870 /* LoadingView.swift */; };
 		94DD9BCA2A90221100A9C870 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD9BC92A90221100A9C870 /* ConnectionView.swift */; };
 		94DD9BCC2A91759800A9C870 /* FlightConnectionsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD9BCB2A91759800A9C870 /* FlightConnectionsViewModelTest.swift */; };
+		94DD9BD02A937BBC00A9C870 /* AlertUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD9BCF2A937BBC00A9C870 /* AlertUIModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		94DD9BC62A901A4100A9C870 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		94DD9BC92A90221100A9C870 /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
 		94DD9BCB2A91759800A9C870 /* FlightConnectionsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightConnectionsViewModelTest.swift; sourceTree = "<group>"; };
+		94DD9BCF2A937BBC00A9C870 /* AlertUIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUIModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 			children = (
 				94DD9BC62A901A4100A9C870 /* LoadingView.swift */,
 				94DD9BC92A90221100A9C870 /* ConnectionView.swift */,
+				94DD9BCF2A937BBC00A9C870 /* AlertUIModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				9482E4322A8EC08000BDD3B1 /* URLSession+Async.swift in Sources */,
 				9482E43E2A8ED44100BDD3B1 /* Utils.swift in Sources */,
 				9482E4352A8EC1C000BDD3B1 /* APIFlightConnectionsDataSource.swift in Sources */,
+				94DD9BD02A937BBC00A9C870 /* AlertUIModel.swift in Sources */,
 				9482E42C2A8EBE5E00BDD3B1 /* API.swift in Sources */,
 				94DD9BC42A9017E900A9C870 /* OriginFlightsView.swift in Sources */,
 				9482E4012A8EBDCA00BDD3B1 /* FlightConnectionsApp.swift in Sources */,
